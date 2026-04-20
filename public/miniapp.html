@@ -914,17 +914,9 @@
 
     function resolveTenantId() {
       const search = new URLSearchParams(window.location.search);
-      const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
-      const tgStartParam = state.tg?.initDataUnsafe?.start_param;
+      const tgStartParam = window.Telegram?.WebApp?.initDataUnsafe?.start_param;
 
-      return (
-        tgStartParam ||
-        search.get("tenant") ||
-        search.get("tenant_id") ||
-        search.get("startapp") ||
-        hash.get("tenant") ||
-        "default"
-      );
+      return tgStartParam || search.get("tenant_id") || search.get("tenant") || "default";
     }
 
     async function loadStorefront() {
